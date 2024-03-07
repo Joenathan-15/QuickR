@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -16,14 +17,12 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/',[NoteController::class,"index"])->name("home");
+Route::post('/',[NoteController::class,"store"]);
+
+Route::get('/detail/{uuid}',[NoteController::class,"detail"])->name("detail");
+Route::put('/detail/{uuid}',[NoteController::class,"update"])->name("detail");
+Route::delete('/detail/{uuid}',[NoteController::class,"destroy"])->name("detail");
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
