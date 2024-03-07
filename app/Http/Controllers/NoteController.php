@@ -14,7 +14,7 @@ class NoteController extends Controller
 {
     public function index()
     {
-        return Inertia::render("note.index");
+        return Inertia::render("note.NoteIndex");
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class NoteController extends Controller
         if ($note->created_ny) {
             $noteAuthID = $note->created_by;
         }
-        return Inertia::render("detail", [
+        return Inertia::render("Note.NoteDetail", [
             "content" => $noteContent,
             "creator_id" => $noteAuthID
         ]);
